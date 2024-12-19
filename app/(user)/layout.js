@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "./components/layout/header/page";
 import Providers from "./components/components-giaodich/redux/Provider";
+import { Suspense } from "react";
+
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function RootLayout({ children }) {
         </head>
         <body>
           <Header />
-          {children}
+          <Suspense>{children}</Suspense>
           <Footer />
         </body>
       </Providers>
