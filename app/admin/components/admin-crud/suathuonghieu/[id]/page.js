@@ -17,7 +17,7 @@ export default function SuaThuongHieu() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/thuonghieu/allthuonghieu/${id}`);
+        const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu/${id}`);
         if (response.ok) {
           const data = await response.json();
           setProductName(data.th);
@@ -42,7 +42,7 @@ export default function SuaThuongHieu() {
     formData.append("mo_ta", description);
 
     try {
-      const response = await fetch(`http://localhost:5000/thuonghieu/updatethuonghieu/${id}`, {
+      const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/updatethuonghieu/${id}`, {
         method: "PUT",
         body: formData,
       });
@@ -87,7 +87,7 @@ export default function SuaThuongHieu() {
               <div className={styles.formGroup}>
                 <label htmlFor="product-image">Ảnh thương hiệu</label>
                 <img
-                  src={`http://localhost:5000/images/${productName.hinh_anh2}`}
+                  src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${productName.hinh_anh2}`}
                   alt={productName.thuong_hieu}
                   style={{ width: "70px", height: "70px" }}
                 />
@@ -101,7 +101,7 @@ export default function SuaThuongHieu() {
               <div className={styles.formGroup}>
                 <label htmlFor="product-logo">Ảnh thương hiệu 2 (logo)</label>
                 <img
-                  src={`http://localhost:5000/images/${productName.hinh_anh}`}
+                  src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${productName.hinh_anh}`}
                   style={{ width: "70px", height: "70px" }}
                 />
                 <input

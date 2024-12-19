@@ -77,7 +77,7 @@ export default function Login() {
     validationSchema: schema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const res = await fetch("http://localhost:5000/users/login", {
+        const res = await fetch("https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/users/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export default function Login() {
   const handleLoginSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential;
     try {
-      const response = await fetch("http://localhost:5000/users/auth/google", {
+      const response = await fetch("https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/users/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

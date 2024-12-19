@@ -47,24 +47,24 @@ export default function SuaSanPham({ params }) {
     const fetchProductAndData = async () => {
       try {
         const brandResponse = await fetch(
-          "http://localhost:5000/thuonghieu/allthuonghieu"
+          "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu"
         );
         const brandData = await brandResponse.json();
         setThuongHieu(brandData.th);
 
         const cateResponse = await fetch(
-          "http://localhost:5000/cate/getAllCateadmin"
+          "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/cate/getAllCateadmin"
         );
         const cateData = await cateResponse.json();
         setCates(cateData.cates);
 
         const productResponse = await fetch(
-          `http://localhost:5000/product/chitietsp/${id}`
+          `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/chitietsp/${id}`
         );
         const productData = await productResponse.json();
         setFormData({ ...productData.product });
         setPreviewImage(
-          `http://localhost:5000/images/${productData.product.hinh_anh}`
+          `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${productData.product.hinh_anh}`
         );
       } catch (error) {
         setErrorMessage("Đã xảy ra lỗi khi tải dữ liệu.");
@@ -159,7 +159,7 @@ export default function SuaSanPham({ params }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/product/capnhatsp/${id}`,
+        `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/capnhatsp/${id}`,
         {
           method: "PUT",
           body: data,

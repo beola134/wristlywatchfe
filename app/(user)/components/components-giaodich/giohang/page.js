@@ -33,7 +33,7 @@ const CartPage = () => {
   );
 
   const ktra = async (items, newQuantity) => {
-    const reponse = await fetch(`http://localhost:5000/product/check/${items._id}?quantity=${newQuantity}`);
+    const reponse = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/check/${items._id}?quantity=${newQuantity}`);
     const data = await reponse.json();
     if (!reponse.ok) {
       Swal.fire({
@@ -132,7 +132,7 @@ const CartPage = () => {
                       {cartItems.map((item) => (
                         <tr key={item._id}>
                           <td>
-                            <img src={`http://localhost:5000/images/${item.hinh_anh}`} alt="" width="100px" />
+                            <img src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`} alt="" width="100px" />
                           </td>
                           <td>{item.ten_san_pham}</td>
                           <td>
@@ -266,7 +266,7 @@ const CartPage = () => {
                     <div key={item._id} className="flex flex-col border rounded-lg p-4 mb-4">
                       <div className="flex items-center">
                         <img
-                          src={`http://localhost:5000/images/${item.hinh_anh}`}
+                          src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                           alt=""
                           width="100px"
                           className="mr-4"

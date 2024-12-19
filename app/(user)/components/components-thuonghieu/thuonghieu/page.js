@@ -17,7 +17,7 @@ export default function Thuonghieu() {
     const fetchCates = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/thuonghieu/allthuonghieu"
+          "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu"
         );
         const data = await res.json();
         setCates(data.th);
@@ -121,7 +121,7 @@ export default function Thuonghieu() {
                     >
                       <img
                         className="w-full h-250px lg:h-[275px] sm:h-[250px] md:h-[250px] object-cover"
-                        src={`http://localhost:5000/images/${hinh_anh2}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${hinh_anh2}`}
                         alt={`Hình ảnh thương hiệu ${item.thuong_hieu}`}
                       />
                     </Link>
@@ -149,7 +149,7 @@ export default function Thuonghieu() {
                   >
                     <img
                       className="w-full h-250px lg:h-[275px] sm:h-[250px] md:h-[250px] object-cover"
-                      src={`http://localhost:5000/images/${hinh_anh2}`}
+                      src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${hinh_anh2}`}
                       alt={`Hình ảnh thương hiệu ${item.thuong_hieu}`}
                     />
                   </Link>

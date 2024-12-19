@@ -17,7 +17,7 @@ const ho_so_admin = ({ params }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/users/${id}`);
+        const res = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/users/${id}`);
         const data = await res.json();
         setUserData(data.user);
       } catch (error) {
@@ -46,7 +46,7 @@ const ho_so_admin = ({ params }) => {
       formData.append("hinh_anh", avatarFile);
     }
     try {
-      const res = await fetch(`http://localhost:5000/users/update/${id}`, {
+      const res = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/users/update/${id}`, {
         method: "PUT",
         body: formData,
       });
@@ -99,7 +99,7 @@ const ho_so_admin = ({ params }) => {
               src={
                 userData.hinh_anh.startsWith("http")
                   ? userData.hinh_anh
-                  : `http://localhost:5000/images/${userData.hinh_anh}`
+                  : `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${userData.hinh_anh}`
               }
               width="300"
               height="363"

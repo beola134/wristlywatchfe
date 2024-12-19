@@ -116,7 +116,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/product/allsp/gioitinh-nam10sp"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/allsp/gioitinh-nam10sp"
       );
       const data = await response.json();
       setProductsNam(data.products);
@@ -130,7 +130,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/product/allsp/gioitinh-nu10sp"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/allsp/gioitinh-nu10sp"
       );
       const data = await response.json();
       setProductsNu(data.products);
@@ -144,7 +144,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/product/allsp/doi10sp"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/allsp/doi10sp"
       );
       const data = await response.json();
       setProductsDoi(data.products);
@@ -158,7 +158,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/product/limit/gioitinh-nam"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/limit/gioitinh-nam"
       );
       const data = await response.json();
       setProductsNewNam(data.products);
@@ -172,7 +172,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/product/limit/gioitinh-nu"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/limit/gioitinh-nu"
       );
       const data = await response.json();
       setProductsNewNu(data.products);
@@ -185,7 +185,7 @@ export default function Main() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/product/limit/doi");
+      const response = await fetch("https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/limit/doi");
       const data = await response.json();
       setProductsNewDoi(data.products);
     };
@@ -203,7 +203,7 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:5000/thuonghieu/allthuonghieu"
+        "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu"
       );
       const data = await response.json();
       setCategory(data.th);
@@ -213,7 +213,7 @@ export default function Main() {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/voucher/getvoucher");
+      const response = await fetch("https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/voucher/getvoucher");
       const data = await response.json();
       setVouchers(data.vouchers);
     };
@@ -387,7 +387,7 @@ export default function Main() {
                   </div>)}
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -518,7 +518,7 @@ export default function Main() {
                     </div>)}
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -650,7 +650,7 @@ export default function Main() {
                     </div>)}
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -835,7 +835,7 @@ export default function Main() {
                     <div className={cx("relative")}>
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -976,7 +976,7 @@ export default function Main() {
                     </div>)}
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -1115,7 +1115,7 @@ export default function Main() {
                     </div>)}
                     <Link href={`/components/product-detail/${item._id}`}>
                       <img
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                         alt={item.ten_san_pham}
                         className={cx(
                           "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"
@@ -1267,7 +1267,7 @@ export default function Main() {
                   >
                     <img
                       alt={item.thuong_hieu}
-                      src={`http://localhost:5000/images/${item.hinh_anh2}`}
+                      src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh2}`}
                       className={cx("")}
                     />
                   </Link>
@@ -1535,7 +1535,7 @@ export default function Main() {
                         alt={item.thuong_hieu}
                         width="100"
                         height="50"
-                        src={`http://localhost:5000/images/${item.hinh_anh}`}
+                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                       />
                     </div>
                   ))}

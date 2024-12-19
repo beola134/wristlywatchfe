@@ -12,7 +12,7 @@ function VoucherModal({ isOpen, onRequestClose, voucherId }) {
   useEffect(() => {
     if (isOpen && voucherId) {
       setLoading(true); // Reset loading state khi mở modal
-      fetch(`http://localhost:5000/voucher/getVoucherById/${voucherId}`)
+      fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/voucher/getVoucherById/${voucherId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch voucher");

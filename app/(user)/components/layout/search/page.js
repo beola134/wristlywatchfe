@@ -30,7 +30,7 @@ export default function Search() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "http://localhost:5000/product/timkiem",
+            "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/timkiem",
             {
               method: "POST",
               headers: {
@@ -94,7 +94,7 @@ export default function Search() {
                 )}
                 <Link href={`/components/product-detail/${item._id}`}>
                   <img
-                    src={`http://localhost:5000/images/${item.hinh_anh}`}
+                    src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${item.hinh_anh}`}
                     alt={item.ten_san_pham}
                     className={cx(
                       "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"

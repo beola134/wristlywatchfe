@@ -35,7 +35,7 @@ export default function DonghoDoi() {
     try {
       const queryParams = new URLSearchParams({ ...filter, page: currentPage });
       const response = await fetch(
-        `http://localhost:5000/product/filtersanphamdongho?${queryParams}`
+        `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/filtersanphamdongho?${queryParams}`
       );
       if (!response.ok) {
         throw new Error("Lỗi không thể tải dữ liệu");
@@ -2064,7 +2064,7 @@ export default function DonghoDoi() {
                           <Link href={`/components/product-detail/${_id}`}>
                             <img
                               className="max-h-[290px]"
-                              src={`http://localhost:5000/images/${hinh_anh}`}
+                              src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${hinh_anh}`}
                               alt={ten}
                               width="300"
                               height="363"

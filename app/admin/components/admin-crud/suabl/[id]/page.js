@@ -20,7 +20,7 @@ export default function SuaVoucher() {
   useEffect(() => {
     const fetchBinhluan = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/comment/get/${id}`);
+        const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/get/${id}`);
         if (response.ok) {
           const data = await response.json();
           setbinhluan(data.comment); 
@@ -41,7 +41,7 @@ const handleSubmit = async (e) => {
     const { tra_loi_binh_luan } = binhluan;  
   
     try {
-      const response = await fetch(`http://localhost:5000/comment/update/${id}`, {
+      const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/update/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function SuaVoucher() {
     const fetchVoucher = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/voucher/getVoucherById/${id}`
+          `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/voucher/getVoucherById/${id}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -94,7 +94,7 @@ export default function SuaVoucher() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/voucher/updateVoucher/${id}`,
+        `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/voucher/updateVoucher/${id}`,
         {
           method: "PUT",
           headers: {

@@ -45,7 +45,7 @@ export default function ThemSanPham() {
     const fetchBrands = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/thuonghieu/allthuonghieu"
+          "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu"
         );
         const data = await response.json();
         setBrands(data.th);
@@ -64,7 +64,7 @@ export default function ThemSanPham() {
     const fetchCategoriesData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/cate/getAllCateadmin"
+          "https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/cate/getAllCateadmin"
         );
         const data = await response.json();
         setCategories(data.cates);
@@ -162,7 +162,7 @@ export default function ThemSanPham() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/product/themsp", {
+      const response = await fetch("https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/themsp", {
         method: "POST",
         body: data,
         headers: {

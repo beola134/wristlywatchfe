@@ -69,7 +69,7 @@ export default function DonghoNam() {
         setLoading(true);
         try {
           const response = await fetch(
-            `http://localhost:5000/product/filtersanphamdongho?${query}`,
+            `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/filtersanphamdongho?${query}`,
             {
               method: "GET",
               headers: {
@@ -107,7 +107,7 @@ export default function DonghoNam() {
     try {
       const queryParams = new URLSearchParams({ ...filter, page: currentPage });
       const response = await fetch(
-        `http://localhost:5000/product/filtersanphamdongho?${queryParams}`
+        `https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/product/filtersanphamdongho?${queryParams}`
       );
       if (!response.ok) {
         throw new Error("Lỗi không thể tải dữ liệu");
@@ -2398,7 +2398,7 @@ export default function DonghoNam() {
                             <div className={cx("relative")}>
                               <Link href={`/components/product-detail/${_id}`}>
                                 <img
-                                  src={`http://localhost:5000/images/${hinh_anh}`}
+                                  src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${hinh_anh}`}
                                   alt={ten_san_pham}
                                   className={cx(
                                     "relative transition-transform duration-500 ease-in-out z-[1] mx-auto"

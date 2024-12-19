@@ -22,7 +22,7 @@ export default function CommentsPage() {
   // gọi tất cả các bình luận từ API
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/comment/showAll?page=${currentPage}&ten_dang_nhap=${search}`);
+      const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/showAll?page=${currentPage}&ten_dang_nhap=${search}`);
       const data = await response.json();
       setComments(data.comments);
       setTotalPages(data.totalPages);
@@ -48,7 +48,7 @@ export default function CommentsPage() {
   };
   const handleToggleComment = async (id, trang_thai) => {
     try {
-      const response = await fetch(`http://localhost:5000/comment/changeStatus/${id}`, {
+      const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/changeStatus/${id}`, {
         method: "PUT",
       });
       const data = await response.json();
@@ -74,7 +74,7 @@ export default function CommentsPage() {
   const handleReplySubmit = async () => {
     if (reply.trim()) {
       try {
-        const response = await fetch(`http://localhost:5000/comment/reply/${replyCommentId}`, {
+        const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/reply/${replyCommentId}`, {
           method: "POST", // Sử dụng PUT nếu bạn đang cập nhật bình luận
           headers: {
             "Content-Type": "application/json",
@@ -146,7 +146,7 @@ export default function CommentsPage() {
           let totalPages = 1;
           const allComments = [];
           while (currentPage <= totalPages) {
-            const response = await fetch(`http://localhost:5000/comment/showAll?page=${currentPage}`);
+            const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/showAll?page=${currentPage}`);
             const data = await response.json();
             allComments.push(...data.comments);
             totalPages = data.totalPages;
@@ -247,7 +247,7 @@ export default function CommentsPage() {
 
       // Lấy tất cả các bình luận
       while (currentPage <= totalPages) {
-        const response = await fetch(`http://localhost:5000/comment/showAll?page=${currentPage}`);
+        const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/showAll?page=${currentPage}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch page ${currentPage}: ${response.statusText}`);
         }
