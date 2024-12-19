@@ -138,8 +138,8 @@ const User = ({ params }) => {
       title: "Bạn có chắc chắn muốn cập nhật thông tin?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
+      confirmButtonText: "Có",
+      cancelButtonText: "Không",
     });
 
     if (result.isConfirmed) {
@@ -203,6 +203,16 @@ const User = ({ params }) => {
       isValid = false;
     }
 
+    if (!userData.dia_chi || userData.dia_chi.trim() === "") {
+      Swal.fire({
+        title: "Lỗi",
+        text: "Địa chỉ không được để trống",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      isValid = false;
+    }
+  
     if (!phoneRegex.test(userData.dien_thoai)) {
       Swal.fire({
         title: "Lỗi",
@@ -289,7 +299,7 @@ const User = ({ params }) => {
           } else if (data.message === "Mật khẩu không hợp lệ") {
             Swal.fire({
               title: "Lỗi",
-              text: "Mật khẩu cũ không hợp lệ",
+              text: "Mật khẩu không được trùng mật khẩu cũ",
               icon: "error",
               confirmButtonText: "OK",
             });
@@ -546,16 +556,20 @@ const User = ({ params }) => {
                     )}
                 </div>
                 <div className={styles.formGroup}>
-                  <label htmlFor="adress">Địa chỉ:</label>
-                  <input
-                    type="text"
-                    id="dia_chi"
-                    name="dia_chi"
-                    value={userData.dia_chi}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                  />
-                </div>
+                <label htmlFor="adress">Địa chỉ:</label>
+                <input
+                  type="text"
+                  id="dia_chi"
+                  name="dia_chi"
+                  value={userData.dia_chi || ""}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                />
+                {(userData.dia_chi?.trim() === "" || !userData.dia_chi) && isEditing && (
+                  <small style={{ color: "red" }}>Địa chỉ không được để trống</small>
+                )}
+              </div>
+              
                 <div className={styles.formGroup}>
                   <label htmlFor="phone">Số điện thoại:</label>
                   <input

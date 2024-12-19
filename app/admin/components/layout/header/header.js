@@ -200,7 +200,7 @@ export default function Menu() {
           </section>
           <section id={styles.content}>
             <nav className={styles.nav}>
-              <i className={`bx bx-menu ${styles.toggleSidebar}`}></i>
+              <i className={` ${styles.toggleSidebar}`}></i>
               <form action="#"></form>
               {/*
               <a href="#" className={styles.navLink}>

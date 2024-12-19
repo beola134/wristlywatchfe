@@ -112,7 +112,11 @@ export default function DanhmucPage() {
   const endDanhmucIndex = Math.min(currentPage * itemsPerPage, totalCates);
 
   const printData = () => {
+    const originalContent = document.body.innerHTML;
+    const tableContent = document.getElementById("productTable").outerHTML;
+    document.body.innerHTML = tableContent;
     window.print();
+    document.body.innerHTML = originalContent;
   };
 
   // Hàm xuất dữ liệu ra Excel

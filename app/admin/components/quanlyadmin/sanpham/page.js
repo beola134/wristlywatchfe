@@ -19,7 +19,11 @@ export default function SanPham() {
   const itemsPerPage = 5;
 
   const printData = () => {
+    const originalContent = document.body.innerHTML;
+    const tableContent = document.getElementById("productTable").outerHTML;
+    document.body.innerHTML = tableContent;
     window.print();
+    document.body.innerHTML = originalContent;    
   };
   const exportToExcel = async () => {
     Swal.fire({

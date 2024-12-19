@@ -280,21 +280,25 @@ export default function Detail({ params }) {
               return Swal.fire({
                 icon: "warning",
                 title: "Bạn cần mua sản phẩm này để có thể bình luận",
+                timer: 3000, // Hiển thị 3 giây
+                showConfirmButton: false, // Ẩn nút xác nhận
               });
             }
             throw new Error(data.message || "Lỗi không thể thêm bình luận");
           }
-
+  
           console.log(data.message);
-
+  
           setCommentText("");
           Swal.fire({
             icon: "success",
             title: "Bình luận thành công!",
-            showConfirmButton: false,
-            timer: 1500,
+            showConfirmButton: false, 
+            timer: 1500, 
           });
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 1500);
         } catch (error) {
           setError(error.message);
         }
@@ -302,12 +306,15 @@ export default function Detail({ params }) {
         Swal.fire({
           icon: "warning",
           title: "Vui lòng nhập bình luận!",
+          timer: 2000, 
+          showConfirmButton: false,
         });
       }
     } else {
       Swal.fire({
         icon: "warning",
         title: "Vui lòng đăng nhập để bình luận",
+        timer: 2500, 
       }).then(() => {
         if (typeof window !== "undefined" && params?.id) {
           const currentUrl = encodeURIComponent(`/components/product-detail/${params.id}`);
@@ -666,7 +673,7 @@ export default function Detail({ params }) {
               {product.gia_giam > 0 ? (
                 <>
                   <div className="line-through mb-[6px] text-sm uppercase font-bold text-[#4c4c4c]">
-                    <span>Giá</span>
+                    <span>Giá </span>
                     <span className="line-through mb-[6px] text-sm uppercase font-bold text-[#4c4c4c]">
                       {product.gia_san_pham.toLocaleString("vi-VN")}₫
                     </span>
@@ -2978,155 +2985,157 @@ export default function Detail({ params }) {
 
       {/* Đánh giá bình luận */}
       <div id="comments" className="container mx-auto px-4 py-4">
-      <div className="pb-1 text-[23px] relative">
-        <span>Đánh giá - Bình luận</span>
-      </div>
-      <div className="comments">
-        <div className="mb-[15px] mt-[11px]">
-          <span>
-            Có <strong>{comments.length}</strong> bình luận, đánh giá
-          </span>
-          <strong> về {product.ten}</strong>
+        <div className="pb-1 text-[23px] relative">
+          <span>Bình luận</span>
         </div>
-        <form
-          name="comment-add-form"
-          id="comment-add-form"
-          className="formComment"
-          onSubmit={(e) => {
-            e.preventDefault();
-            addComment();
-          }}
-        >
-          <label className="labelForm block font-semibold text-sm mb-4">Nhận xét và đánh giá</label>
-    
-          <div className="textarea mb-4">
-            <textarea
-              name="content"
-              id="cmt-content"
-              placeholder="Viết bình luận của bạn..."
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              className="w-full p-4 border border-gray-300 rounded-md min-h-[123px] resize-none text-sm text-gray-700"
-            ></textarea>
+        <div className="comments">
+          <div className="mb-[15px] mt-[11px]">
+            <span>
+              Có <strong>{comments.length}</strong> bình luận
+            </span>
+            <strong> về {product.ten}</strong>
           </div>
-    
-          <input
-            type="submit"
-            className="bg-[#796752] text-white px-6 py-2 rounded transition duration-300 hover:bg-[#5a4a3d] cursor-pointer"
-            value="Gửi bình luận"
-          />
-    
-          <div className="mt-6 bg-white p-4 border-2 border-gray-200 rounded-lg">
-            {Array.isArray(comments) && comments.length > 0 ? (
-              <>
-                {comments.map((comment, index) => (
-                  <div key={index} className="comment flex items-start py-4 border-b border-gray-200 mb-6">
-                    <div className="profile mr-4">
-                      <img
-                        src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${comment.user?.hinh_anh}`}
-                        alt="Profile Picture"
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className=" flex items-center text-sm text-gray-600 mb-2">
-                        <span className="name font-bold">{comment.user?.ten_dang_nhap}</span>
-                        <span className="date ml-4 text-gray-400">
-                          {new Intl.DateTimeFormat("vi-VN", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            second: "2-digit",
-                          }).format(new Date(comment.ngay_binh_luan))}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-700 mt-2 bg-white p-4 border-[1px] border-gray-200 rounded-lg">
-                        {comment.noi_dung}
-                      </p>
-    
-                      {/* Hiển thị câu trả lời nếu có */}
-                      
-                      {comment.tra_loi_binh_luan && comment.tra_loi_binh_luan.trim() !== "" && (
-                        <div className=" ml-9 reply mt-4 bg-gray-100 p-4 border-[1px] border-gray-200 rounded-lg">
-                          <div className="flex items-center text-sm text-gray-600 mb-2">
-                            <span className="name font-bold">{comment.traloi_user?.ten_dang_nhap}</span>
-                            <span className="date ml-4 text-gray-400">
-                              {comment.ngay_tra_loi && !isNaN(new Date(comment.ngay_tra_loi).getTime()) ? (
-                                new Intl.DateTimeFormat("vi-VN", {
-                                  year: "numeric",
-                                  month: "2-digit",
-                                  day: "2-digit",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  second: "2-digit",
-                                }).format(new Date(comment.ngay_tra_loi))
-                              ) : (
-                                "Ngày không hợp lệ"
-                              )}
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-700">{comment.tra_loi_binh_luan}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-    
-                <div className="pagination flex justify-center items-center mt-6">
-                  <span
-                    title="First page"
-                    className={`cursor-pointer px-4 py-2 border rounded-md ${
-                      currentPage === 1 ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => currentPage > 1 && handlePageChange(1)}
-                  >
-                    ‹‹
-                  </span>
-    
-                  <span
-                    className={`cursor-pointer px-4 py-2 border rounded-md ${
-                      currentPage === 1 ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                  >
-                    ‹
-                  </span>
-    
-                  <span className="currentPage px-4 py-2">{`Trang ${currentPage} / ${totalPages || 1}`}</span>
-    
-                  <span
-                    className={`cursor-pointer px-4 py-2 border rounded-md ${
-                      currentPage === totalPages ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                  >
-                    ›
-                  </span>
-    
-                  <span
-                    className={`cursor-pointer px-4 py-2 border rounded-md ${
-                      currentPage === totalPages ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => currentPage < totalPages && handlePageChange(totalPages)}
-                  >
-                    ››
-                  </span>
-                </div>
-              </>
-            ) : (
-              <p className="text-gray-500 text-sm">
-                Mời bạn nhận xét về sản phẩm, hãy bình luận có văn hoá để tránh bị khoá tài khoản.
-              </p>
-            )}
-          </div>
-        </form>
-      </div>
-    </div>
-    
+          <form
+            name="comment-add-form"
+            id="comment-add-form"
+            className="formComment"
+            onSubmit={(e) => {
+              e.preventDefault();
+              addComment();
+            }}
+          >
+            <label className="labelForm block font-semibold text-sm mb-4">Nhận xét</label>
 
-    
+            <div className="textarea mb-4">
+              <textarea
+                name="content"
+                id="cmt-content"
+                placeholder="Viết bình luận của bạn..."
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                className="w-full p-4 border border-gray-300 rounded-md min-h-[123px] resize-none text-sm text-gray-700"
+              ></textarea>
+            </div>
+
+            <input
+              type="submit"
+              className="bg-[#796752] text-white px-6 py-2 rounded transition duration-300 hover:bg-[#5a4a3d] cursor-pointer"
+              value="Gửi bình luận"
+            />
+
+            <div className="mt-6 bg-white p-4 border-2 border-gray-200 rounded-lg">
+              {Array.isArray(comments) && comments.length > 0 ? (
+                <>
+                  {comments.map((comment, index) => (
+                    <div key={index} className="comment flex items-start py-4 border-b border-gray-200 mb-6">
+                      <div className="profile mr-4">
+                        <img
+                          src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${comment.user?.hinh_anh}`}
+                          alt="Profile Picture"
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className=" flex items-center text-sm text-gray-600 mb-2">
+                          <span className="name font-bold">{comment.user?.ten_dang_nhap}</span>
+                          <span className="date ml-4 text-gray-400">
+                            {new Intl.DateTimeFormat("vi-VN", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit",
+                            }).format(new Date(comment.ngay_binh_luan))}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-700 mt-2 bg-white p-4 border-[1px] border-gray-200 rounded-lg">
+                          {comment.noi_dung}
+                        </p>
+
+                        {/* Hiển thị câu trả lời nếu có */}
+
+                        {comment.tra_loi_binh_luan && comment.tra_loi_binh_luan.trim() !== "" && (
+                          <div className=" ml-9 reply mt-4 bg-gray-100 p-4 border-[1px] border-gray-200 rounded-lg">
+                            <div className="flex items-center text-sm text-gray-600 mb-2">
+                              <div className="profile mr-4">
+                                <img
+                                  src="/image/item/admin.jpg"
+                                  alt="Profile Picture"
+                                  className="w-12 h-12 rounded-full object-cover"
+                                />
+                              </div>
+                              <span className="name font-bold">Admin</span>
+                              <span className="date ml-4 text-gray-400">
+                                {comment.ngay_tra_loi && !isNaN(new Date(comment.ngay_tra_loi).getTime())
+                                  ? new Intl.DateTimeFormat("vi-VN", {
+                                      year: "numeric",
+                                      month: "2-digit",
+                                      day: "2-digit",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit",
+                                    }).format(new Date(comment.ngay_tra_loi))
+                                  : "Ngày không hợp lệ"}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-700">{comment.tra_loi_binh_luan}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="pagination flex justify-center items-center mt-6">
+                    <span
+                      title="First page"
+                      className={`cursor-pointer px-4 py-2 border rounded-md ${
+                        currentPage === 1 ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => currentPage > 1 && handlePageChange(1)}
+                    >
+                      ‹‹
+                    </span>
+
+                    <span
+                      className={`cursor-pointer px-4 py-2 border rounded-md ${
+                        currentPage === 1 ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                    >
+                      ‹
+                    </span>
+
+                    <span className="currentPage px-4 py-2">{`Trang ${currentPage} / ${totalPages || 1}`}</span>
+
+                    <span
+                      className={`cursor-pointer px-4 py-2 border rounded-md ${
+                        currentPage === totalPages ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                    >
+                      ›
+                    </span>
+
+                    <span
+                      className={`cursor-pointer px-4 py-2 border rounded-md ${
+                        currentPage === totalPages ? "text-gray-400 border-gray-300" : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => currentPage < totalPages && handlePageChange(totalPages)}
+                    >
+                      ››
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <p className="text-gray-500 text-sm">
+                  Mời bạn nhận xét về sản phẩm, hãy bình luận có văn hoá để tránh bị khoá tài khoản.
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

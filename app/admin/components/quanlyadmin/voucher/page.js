@@ -333,7 +333,9 @@ export default function VoucherPage() {
           icon: "success",
           title: "Xóa thành công!",
           text: "Danh mục đã được xóa thành công!",
-        });
+        }).then(() => {
+          window.location.reload();
+        })
       } else {
         Swal.fire({
           icon: "error",

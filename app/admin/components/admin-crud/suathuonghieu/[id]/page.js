@@ -7,10 +7,14 @@ import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 
 export default function SuaThuongHieu() {
-  const [productName, setProductName] = useState("");
-  const [productImage, setProductImage] = useState("");
-  const [productLogo, setProductLogo] = useState("");
-  const [description, setDescription] = useState("");
+  const [product, setProduct] = useState({
+    thuong_hieu: "",
+    hinh_anh: "",
+    hinh_anh2: "",
+    mo_ta: "",
+  });
+  const [productImage, setProductImage] = useState(null);
+  const [productLogo, setProductLogo] = useState(null);
   const router = useRouter();
   const { id } = useParams();
 
@@ -20,7 +24,12 @@ export default function SuaThuongHieu() {
         const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/allthuonghieu/${id}`);
         if (response.ok) {
           const data = await response.json();
-          setProductName(data.th);
+          setProduct({
+            thuong_hieu: data.th.thuong_hieu || "",
+            hinh_anh: data.th.hinh_anh || "",
+            hinh_anh2: data.th.hinh_anh2 || "",
+            mo_ta: data.th.mo_ta || "",
+          });
         } else {
           Swal.fire("Error", "Không tìm thấy thương hiệu!", "error");
         }
@@ -36,10 +45,10 @@ export default function SuaThuongHieu() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("thuong_hieu", productName);
+    formData.append("thuong_hieu", product.thuong_hieu);
+    formData.append("mo_ta", product.mo_ta);
     if (productImage) formData.append("hinh_anh", productImage);
     if (productLogo) formData.append("hinh_anh2", productLogo);
-    formData.append("mo_ta", description);
 
     try {
       const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/thuonghieu/updatethuonghieu/${id}`, {
@@ -80,17 +89,19 @@ export default function SuaThuongHieu() {
                 <input
                   type="text"
                   id="product-name"
-                  value={productName.thuong_hieu}
-                  onChange={(e) => setProductName(e.target.value)}
+                  value={product.thuong_hieu}
+                  onChange={(e) => setProduct({ ...product, thuong_hieu: e.target.value })}
                 />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="product-image">Ảnh thương hiệu</label>
-                <img
-                  src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${productName.hinh_anh2}`}
-                  alt={productName.thuong_hieu}
-                  style={{ width: "70px", height: "70px" }}
-                />
+                {product.hinh_anh2 && (
+                  <img
+                    src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${product.hinh_anh2}`}
+                    alt={product.thuong_hieu}
+                    style={{ width: "70px", height: "70px" }}
+                  />
+                )}
                 <input
                   type="file"
                   id="product-image"
@@ -100,10 +111,13 @@ export default function SuaThuongHieu() {
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="product-logo">Ảnh thương hiệu 2 (logo)</label>
-                <img
-                  src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${productName.hinh_anh}`}
-                  style={{ width: "70px", height: "70px" }}
-                />
+                {product.hinh_anh && (
+                  <img
+                    src={`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/images/${product.hinh_anh}`}
+                    alt={product.thuong_hieu}
+                    style={{ width: "70px", height: "70px" }}
+                  />
+                )}
                 <input
                   type="file"
                   id="product-logo"
@@ -113,7 +127,11 @@ export default function SuaThuongHieu() {
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="description">Mô tả thương hiệu</label>
-                <textarea id="description" value={productName.mo_ta} onChange={(e) => setDescription(e.target.value)} />
+                <textarea
+                  id="description"
+                  value={product.mo_ta}
+                  onChange={(e) => setProduct({ ...product, mo_ta: e.target.value })}
+                />
               </div>
               <button type="submit" className="btn btn-outline-primary">
                 Cập nhật

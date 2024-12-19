@@ -67,7 +67,11 @@ export default function DanhMuc() {
   };
 
   const printData = () => {
+    const originalContent = document.body.innerHTML;
+    const tableContent = document.getElementById("productTable").outerHTML;
+    document.body.innerHTML = tableContent;
     window.print();
+    document.body.innerHTML = originalContent;
   };
 
   const copyData = () => {

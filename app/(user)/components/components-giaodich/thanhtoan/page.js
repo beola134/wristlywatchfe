@@ -295,8 +295,8 @@ export default function ThanhToan() {
       title: "Bạn có chắc chắn muốn đặt hàng không?",
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
+      confirmButtonText: "Có",
+      cancelButtonText: "Không",
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Xử lý thanh toán qua ZaloPay

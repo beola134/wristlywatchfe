@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import styles from "./suabl.module.css";
 import { useRouter, useParams } from "next/navigation";
-import Swal from 'sweetalert2';  
+import Swal from "sweetalert2";
 
 export default function SuaVoucher() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function SuaVoucher() {
         const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/get/${id}`);
         if (response.ok) {
           const data = await response.json();
-          setbinhluan(data.comment); 
+          setbinhluan(data.comment);
         } else {
           Swal.fire("Error", "Không tìm thấy bình luận!", "error");
         }
@@ -35,11 +35,11 @@ export default function SuaVoucher() {
     fetchBinhluan();
   }, [id]);
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const { tra_loi_binh_luan } = binhluan;  
-  
+
+    const { tra_loi_binh_luan } = binhluan;
+
     try {
       const response = await fetch(`https://wristlywatchbe-bd4bdd62f0ed.herokuapp.com/comment/update/${id}`, {
         method: "PUT",
@@ -47,14 +47,14 @@ const handleSubmit = async (e) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          tra_loi_binh_luan,  
+          tra_loi_binh_luan,
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         Swal.fire("Success", data.message, "success");
-        router.push("/admin/components/quanlyadmin/comments"); 
+        router.push("/admin/components/quanlyadmin/comments");
       } else {
         const errorData = await response.json();
         Swal.fire("Error", errorData.message || "Cập nhật không thành công", "error");
@@ -64,7 +64,6 @@ const handleSubmit = async (e) => {
       Swal.fire("Error", "Có lỗi xảy ra khi cập nhật bình luận!", "error");
     }
   };
-  
 
   return (
     <div className={styles.SidebarContainer}>
@@ -79,12 +78,7 @@ const handleSubmit = async (e) => {
             <div className={styles.container1}>
               <div className={styles.formGroup}>
                 <label htmlFor="noi_dung">Nội dung bình luận</label>
-                <textarea
-                  id="noi_dung"
-                  className="noi_dung"
-                  value={binhluan.noi_dung}
-                  readOnly
-                />
+                <textarea id="noi_dung" className="noi_dung" value={binhluan.noi_dung} readOnly />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="tra_loi_binh_luan">Trả lời bình luận</label>
@@ -117,19 +111,10 @@ const handleSubmit = async (e) => {
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="id_san_pham">ID Sản phẩm</label>
-                <input
-                  type="text"
-                  id="id_san_pham"
-                  className="id_san_pham"
-                  value={binhluan.id_san_pham}
-                  readOnly
-                />
+                <input type="text" id="id_san_pham" className="id_san_pham" value={binhluan.id_san_pham} readOnly />
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-outline-primary"
-              >
+              <button type="submit" className="btn btn-outline-primary">
                 Cập nhật
               </button>
               <button

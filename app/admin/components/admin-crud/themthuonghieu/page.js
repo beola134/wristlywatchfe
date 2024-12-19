@@ -123,7 +123,7 @@ export default function ThemThuongHieu() {
                 />
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="product-logo">Ảnh thương hiẹu 2 (logo)</label>
+                <label htmlFor="product-logo">Ảnh thương hiệu 2 (logo)</label>
                 <input
                     type="file"
                     id="product-logo"
