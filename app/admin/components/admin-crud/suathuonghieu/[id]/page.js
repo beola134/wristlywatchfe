@@ -69,7 +69,7 @@ export default function SuaThuongHieu() {
       <section id={styles.content}>
         <div className={styles.header1}>
           <div className={styles.title} style={{ fontWeight: "bold" }}>
-            Sửa Danh Mục
+            Sửa Thương Hiệu
           </div>
         </div>
         <div className={styles.bg}>

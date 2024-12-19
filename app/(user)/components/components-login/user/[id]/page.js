@@ -683,7 +683,7 @@ const User = ({ params }) => {
                               <div className="flex space-x-2">
                                 <Link
                                   href={`/components/product-detail/${order.chiTietDonHangs[0]?.product._id}`}
-                                  className="bg-blue-500 text-white px-1 py-0.5 sm:px-2 sm:py-1 rounded hover:bg-blue-600 transition-colors text-xs sm:text-sm">
+                                  className="bg-[#796752] text-white px-1 py-0.5 sm:px-2 sm:py-1 rounded transition-colors text-xs sm:text-sm">
                                   Mua Lại
                                 </Link>
                               </div>

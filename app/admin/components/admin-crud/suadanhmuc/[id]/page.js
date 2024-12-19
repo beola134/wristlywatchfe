@@ -15,13 +15,14 @@ export default function SuaDanhmuc() {
     hinh_anh: "",
     mo_ta: "",
   });
-  const [comments, setComments] = useState([]); // State để lưu bình luận
 
-  // Lấy thông tin danh mục
   useEffect(() => {
     const fetchDanhmuc = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/cate/allcate/${id}`);
+        const response = await fetch(
+          `http://localhost:5000/cate/allcate/${id}`
+        );
+        3.
         if (response.ok) {
           const data = await response.json();
           setdanhmuc(data.cates);
@@ -33,24 +34,7 @@ export default function SuaDanhmuc() {
         Swal.fire("Error", "Có lỗi xảy ra khi tải thông tin!", "error");
       }
     };
-
-    const fetchComments = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/comment/getByCategory/${id}`); // API lấy bình luận theo danh mục
-        if (response.ok) {
-          const data = await response.json();
-          setComments(data); // Cập nhật bình luận vào state
-        } else {
-          Swal.fire("Error", "Không tìm thấy bình luận!", "error");
-        }
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-        Swal.fire("Error", "Có lỗi xảy ra khi tải bình luận!", "error");
-      }
-    };
-
     fetchDanhmuc();
-    fetchComments(); // Lấy bình luận khi component được render
   }, [id]);
 
   const handleChange = (e) => {
@@ -184,31 +168,6 @@ export default function SuaDanhmuc() {
               </button>
             </div>
           </form>
-          {/* Hiển thị bình luận */}
-          <div className={styles.commentsSection}>
-            <h4>Bình luận:</h4>
-            {comments.length > 0 ? (
-              comments.map((comment) => (
-                <div key={comment._id} className={styles.comment}>
-                  <p>{comment.noi_dung}</p>
-                  <small>
-                    <strong>Ngày bình luận: </strong>{comment.ngay_binh_luan}
-                  </small>
-                  {comment.tra_loi_binh_luan && (
-                    <div>
-                      <strong>Trả lời: </strong>
-                      <p>{comment.tra_loi_binh_luan}</p>
-                      <small>
-                        <strong>Ngày trả lời: </strong>{comment.ngay_tra_loi}
-                      </small>
-                    </div>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p>Chưa có bình luận nào.</p>
-            )}
-          </div>
         </div>
       </section>
     </div>

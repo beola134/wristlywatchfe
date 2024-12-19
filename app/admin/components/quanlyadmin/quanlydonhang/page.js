@@ -114,7 +114,7 @@ export default function DonHang() {
           const workbook = new ExcelJS.Workbook();
           const worksheet = workbook.addWorksheet("Danh sách đơn hàng");
           worksheet.columns = [
-            { header: "ID đơn hàng", key: "_id", width: 20 },
+            { header: "STT", key: "index", width: 20 },
             { header: "Địa chỉ", key: "dia_chi", width: 25 },
             { header: "Tên khách hàng", key: "ho_ten", width: 20 },
             { header: "Số điện thoại", key: "dien_thoai", width: 15 },
@@ -134,7 +134,7 @@ export default function DonHang() {
           });
 
           await Promise.all(
-            donHangs.map(async (item) => {
+            donHangs.map(async (item,index) => {
               const hoTen =
                 nguoiDungMap[item.id_nguoi_dung]?.ho_ten || "Đang tải...";
               const dienThoai =
@@ -151,7 +151,7 @@ export default function DonHang() {
                 item.trang_thai;
               // Thêm dòng vào worksheet
               worksheet.addRow({
-                _id: item._id || "N/A",
+                index: index+1 || "N/A",
                 dia_chi: item.dia_chi || "N/A",
                 ho_ten: hoTen,
                 dien_thoai: dienThoai,
@@ -230,7 +230,7 @@ export default function DonHang() {
         doc.text("Danh sách đơn hàng", 14, 20);
 
         const headers = [
-          "ID đơn hàng",
+          "STT",
           "Địa chỉ",
           "Tên khách hàng",
           "Số điện thoại",
@@ -240,7 +240,7 @@ export default function DonHang() {
           "Tình trạng",
         ];
         const rows = [];
-        donHangs.forEach((item) => {
+        donHangs.forEach((item,index) => {
           const hoTen = nguoiDungMap[item.id_nguoi_dung]?.ho_ten || "Đang tải...";
           const dienThoai = nguoiDungMap[item.id_nguoi_dung]?.dien_thoai || "Đang tải...";
           const thoiGianTao = item.thoi_gian_tao
@@ -253,7 +253,7 @@ export default function DonHang() {
           const tinhTrang =
             statusOptions.find((status) => status === item.trang_thai) || item.trang_thai;
           rows.push([
-            item._id || "N/A",
+            index+1 || "N/A",
             item.dia_chi || "N/A",
             hoTen,
             dienThoai,
@@ -462,34 +462,36 @@ export default function DonHang() {
                 <table id="productTable" className={styles.productTable}>
                   <thead>
                     <tr>
-                      <th style={{ width: "18%", textAlign: "center" }}>ID đơn hàng</th>
-                      <th style={{ width: "12%", textAlign: "center" }}>Địa chỉ</th>
-                      <th style={{ width: "12%", textAlign: "center" }}>Tên khách hàng</th>
-                      <th style={{ width: "10%", textAlign: "center" }}>Số điện thoại</th>
+                      <th style={{ width: "5%", textAlign: "center" }}>STT</th>
+                      <th style={{ width: "15%", textAlign: "center" }}>Địa chỉ</th>
+                      <th style={{ width: "15%", textAlign: "center" }}>Tên khách hàng</th>
+                      <th style={{ width: "15%", textAlign: "center" }}>Số điện thoại</th>
                       <th style={{ width: "10%", textAlign: "center" }}>Ghi chú</th>
                       <th style={{ width: "10%", textAlign: "center" }}>Ngày mua</th>
                       <th style={{ width: "11%", textAlign: "center" }}>Tổng tiền</th>
-                      <th style={{ width: "17%", textAlign: "center" }}>Tình trạng</th>
+                      <th style={{ width: "10%", textAlign: "center" }}>Trạng thái thanh toán</th>
+                      <th style={{ width: "18%", textAlign: "center" }}>Tình trạng</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {displayDonhang.map((item) => (
+                    {displayDonhang.map((item,index) => (
                       <tr key={item._id}>
-                        <td>{item._id}</td>
-                        <td>
+                        <td style={{ "text-align": "center" }}>{index+1}</td>
+                        <td style={{ "text-align": "center" }}>
                           <p className={styles.mota}>{item.dia_chi}</p>
                         </td>
-                        <td>{nguoiDungMap[item.id_nguoi_dung]?.ho_ten || "Đang tải..."}</td>
-                        <td>{nguoiDungMap[item.id_nguoi_dung]?.dien_thoai || "Đang tải..."}</td>
-                        <td>{item.ghi_chu}</td>
-                        <td>
+                        <td style={{ "text-align": "center" }}>{nguoiDungMap[item.id_nguoi_dung]?.ho_ten || "Đang tải..."}</td>
+                        <td style={{ "text-align": "center" }}>{nguoiDungMap[item.id_nguoi_dung]?.dien_thoai || "Đang tải..."}</td>
+                        <td style={{ "text-align": "center" }}>{item.ghi_chu}</td>
+                        <td style={{ "text-align": "center" }}>
                           {new Intl.DateTimeFormat("vi-VN", {
                             day: "2-digit",
                             month: "2-digit",
                             year: "numeric",
                           }).format(new Date(item.thoi_gian_tao))}
                         </td>
-                        <td>{item.tong_tien.toLocaleString("vi-VN")}₫</td>
+                        <td style={{ "text-align": "center" }}>{item.tong_tien.toLocaleString("vi-VN")}₫</td>
+                        <td style={{ "text-align": "center" }}>{item.trang_thai_thanh_toan} </td>
 
                         <td style={{ "text-align": "center" }}>
                           <p className={styles.trangthai}>

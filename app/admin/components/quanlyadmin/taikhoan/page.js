@@ -163,7 +163,7 @@ export default function TaiKhoan() {
           const workbook = new ExcelJS.Workbook();
           const worksheet = workbook.addWorksheet("Danh sách tài khoản");
           worksheet.columns = [
-            { header: "ID tài khoản", key: "_id", width: 20 },
+            { header: "STT", key: "index", width: 20 },
             { header: "Họ và tên", key: "ho_ten", width: 25 },
             { header: "Địa chỉ", key: "dia_chi", width: 30 },
             { header: "Email", key: "email", width: 40 },
@@ -183,11 +183,11 @@ export default function TaiKhoan() {
           });
 
           // Lặp qua dữ liệu users và thêm vào Excel
-          users.forEach((user) => {
+          users.forEach((user,index) => {
 
             // Thêm dòng vào worksheet
             worksheet.addRow({
-              _id: user._id || "N/A",
+              index:index+1 ,
               ho_ten: user.ho_ten || "N/A",
               dia_chi: user.dia_chi || "N/A",
               email: user.email || "N/A",
@@ -259,21 +259,21 @@ const exportToPDF = () => {
         doc.text("Danh sách tài khoản", 14, 20);
         const rows = [];
         const headers = [
-          "ID tài khoản",
+          "STT",
           "Họ và tên",
           "Địa chỉ",
           "Email",
           "Số điện thoại",
           "Chức vụ",
         ];
-        users.forEach((user) => {
-          const id = user._id || "N/A";
+        users.forEach((user,index) => {
+          index = index+1 || "N/A";
           const hoTen = user.ho_ten || "N/A";
           const diaChi = user.dia_chi || "N/A";
           const email = user.email || "N/A";
           const dienThoai = user.dien_thoai || "N/A";
           const chucVu = user.quyen === "1" ? "Quản trị viên" : "Khách hàng";
-          rows.push([id, hoTen, diaChi, email, dienThoai, chucVu]);
+          rows.push([index, hoTen, diaChi, email, dienThoai, chucVu]);
         });
         doc.autoTable({
           head: [headers],
@@ -426,19 +426,19 @@ const exportToPDF = () => {
                 <table id="productTable" className={styles.productTable}>
                   <thead>
                     <tr>
-                      <th style={{ width: "18%", textAlign: "center" }}>ID tài khoản</th>
-                      <th style={{ width: "15%", textAlign: "center" }}>Họ và tên</th>
-                      <th style={{ width: "12%", textAlign: "center" }}>Ảnh</th>
+                      <th style={{ width: "5%", textAlign: "center" }}>STT</th>
+                      <th style={{ width: "20%", textAlign: "center" }}>Họ và tên</th>
+                      <th style={{ width: "15%", textAlign: "center" }}>Ảnh</th>
                       <th style={{ width: "10%", textAlign: "center" }}>Địa chỉ</th>
                       <th style={{ width: "18%", textAlign: "center" }}>Email</th>
-                      <th style={{ width: "12%", textAlign: "center" }}>Số điện thoại</th>
+                      <th style={{ width: "17%", textAlign: "center" }}>Số điện thoại</th>
                       <th style={{ width: "15%", textAlign: "center" }}>Chức vụ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {displayUsers.map((item) => (
+                    {displayUsers.map((item,index) => (
                       <tr key={item._id}>
-                        <td>{item._id}</td>
+                        <td  style={{ textAlign: "center" }}>{index+1}</td>
                         <td style={{ textAlign: "center" }}>
                           <p className={styles.mota}>{item.ho_ten}</p>
                         </td>

@@ -101,7 +101,7 @@ export default function DanhMuc() {
           const workbook = new ExcelJS.Workbook();
           const worksheet = workbook.addWorksheet("Danh sách thương hiệu");
           worksheet.columns = [
-            { header: "ID thương hiệu", key: "_id", width: 20 },
+            { header: "STT", key: "index", width: 20 },
             { header: "Tên thương hiệu", key: "thuong_hieu", width: 25 },
             { header: "Ghi chú", key: "mo_ta", width: 40 },
             { header: "Ảnh thương hiệu", key: "hinh_anh", width: 20 },
@@ -118,7 +118,7 @@ export default function DanhMuc() {
           await Promise.all(
             categories.map(async (item, index) => {
               worksheet.addRow({
-                _id: item._id,
+                index:index+1,
                 thuong_hieu: item.thuong_hieu,
                 mo_ta: item.mo_ta,
                 hinh_anh: "",
@@ -224,23 +224,23 @@ export default function DanhMuc() {
       }
     }
 
-    // Thêm một hàng trống vào đầu bảng
+   
     const dataTable = [
-      // Hàng trống đầu tiên
-      { _id: "", mo_ta: "", thuong_hieu: "", hinh_anh2: "" }, // Hàng trống
+  
+      { index: "", mo_ta: "", thuong_hieu: "", hinh_anh2: "" }, 
 
-      // Dữ liệu các hàng tiếp theo
-      ...categories.map((item) => ({
-        _id: item._id,
+    
+      ...categories.map((item,index) => ({
+        index:index+1,
         mo_ta: item.mo_ta,
         thuong_hieu: item.thuong_hieu,
         hinh_anh2: item.hinh_anh2,
       })),
     ];
 
-    // Tạo bảng với startY = 40 để tạo khoảng trống giữa tiêu đề và dữ liệu đầu tiên
+ 
     doc.autoTable({
-      body: dataTable, // Sử dụng dữ liệu với hàng trống đầu tiên
+      body: dataTable, 
       styles: {
         font: "Roboto",
         fontSize: 10,
@@ -262,7 +262,7 @@ export default function DanhMuc() {
         3: { halign: "center", cellWidth: 50 },
       },
       columns: [
-        { header: "ID thương hiệu", dataKey: "_id" },
+        { header: "STT", dataKey: "index" },
         { header: "Ghi chú", dataKey: "mo_ta" },
         { header: "Tên thương hiệu", dataKey: "thuong_hieu" },
         { header: "Ảnh thương hiệu", dataKey: "hinh_anh2" },
@@ -417,17 +417,17 @@ export default function DanhMuc() {
                 <table id="productTable" className={styles.productTable}>
                   <thead>
                     <tr>
-                      <th style={{ width: "15%", textAlign: "center" }}>ID thương hiệu</th>
-                      <th style={{ width: "40%", textAlign: "center" }}>Ghi chú</th>
-                      <th style={{ width: "15%", textAlign: "center" }}>Tên thương hiệu</th>
+                      <th style={{ width: "5%", textAlign: "center" }}>STT</th>
+                      <th style={{ width: "45%", textAlign: "center" }}>Ghi chú</th>
+                      <th style={{ width: "20%", textAlign: "center" }}>Tên thương hiệu</th>
                       <th style={{ width: "15%", textAlign: "center" }}>Ảnh thương hiệu</th>
                       <th style={{ width: "15%", textAlign: "center" }}>Chức năng</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {displayCategories.map((item) => (
+                    {displayCategories.map((item,index) => (
                       <tr key={item._id}>
-                        <td>{item._id}</td>
+                        <td  style={{ textAlign: "center" }} >{index + 1}</td>
                         <td style={{ textAlign: "center" }}>
                           <p className={styles.mota}>{item.mo_ta}</p>
                         </td>

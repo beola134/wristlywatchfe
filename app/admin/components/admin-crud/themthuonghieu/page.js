@@ -24,7 +24,7 @@ export default function ThemThuongHieu() {
         Swal.fire({
             icon: "warning",
             title: "Thiếu thông tin",
-            text: "Vui lòng nhập tên danh mục!",
+            text: "Vui lòng nhập tên thương hiệu!",
         });
         return;
     }
@@ -32,7 +32,7 @@ export default function ThemThuongHieu() {
         Swal.fire({
             icon: "warning",
             title: "Thiếu thông tin",
-            text: "Vui lòng chọn hình ảnh cho danh mục!",
+            text: "Vui lòng chọn hình ảnh cho thương hiệu!",
         });
         return;
     }
@@ -40,7 +40,7 @@ export default function ThemThuongHieu() {
         Swal.fire({
             icon: "warning",
             title: "Thiếu thông tin",
-            text: "Vui lòng chọn hình ảnh cho danh mục!",
+            text: "Vui lòng chọn hình ảnh cho thương hiệu!",
         });
         return;
     }
@@ -48,7 +48,7 @@ export default function ThemThuongHieu() {
         Swal.fire({
             icon: "warning",
             title: "Thiếu thông tin",
-            text: "Vui lòng nhập mô tả cho danh mục!",
+            text: "Vui lòng nhập mô tả cho thương hiệu!",
         });
         return;
     }
@@ -69,7 +69,7 @@ export default function ThemThuongHieu() {
             Swal.fire({
                 icon: "success",
                 title: "Thành công",
-                text: "Thêm danh mục thành công!",
+                text: "Thêm thương hiệu thành công!",
             }).then(() => {
                     router.push("/admin/components/quanlyadmin/thuonghieu");
                 });

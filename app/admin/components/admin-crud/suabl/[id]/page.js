@@ -135,7 +135,7 @@ const handleSubmit = async (e) => {
               <button
                 type="button"
                 className="btn btn-outline-secondary"
-                onClick={() => router.push("/admin/components/quanlyadmin/voucher")}
+                onClick={() => router.push("/admin/components/quanlyadmin/comments")}
               >
                 Hủy bỏ
               </button>

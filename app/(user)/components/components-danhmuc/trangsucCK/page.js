@@ -169,16 +169,16 @@ export default function TrangsucCK() {
                                     </Link>
                                   </figure>
                                   <h3>
-                                    <Link
-                                      className="text-[17px] font-semibold mb-2"
-                                      href="#"
-                                      title={ten}
-                                    >
-                                      <span className={styles["cat-name"]}>
-                                        {ten_san_pham}
-                                      </span>
-                                      {ma_san_pham}
-                                    </Link>
+                                  <Link
+                                  className="text-[17px] font-semibold mb-2"
+                                  href="#"
+                                  title={ten}
+                                >
+                                  <span className="text-gray-500 block text-[14px] mt-1.5 mb-2 font-normal leading-relaxed">
+                                    {ten_san_pham}
+                                  </span>
+                                  {ma_san_pham}
+                                </Link>
                                   </h3>
                                   <span className="inline-block text-[12px] uppercase text-gray-500 mb-1.5">
                                     {loai}
